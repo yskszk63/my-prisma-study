@@ -1,0 +1,15 @@
+{
+  "extends": "@tsconfig/strictest",
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "es2022",
+    "moduleResolution": "node",
+    "noEmit": true
+  },
+  "ts-node": {
+    "swc": true,
+    "esm": true
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules/"]
+}

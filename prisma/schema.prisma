@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["interactiveTransactions"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Bottom {
+  id     String   @id @default(uuid())
+
+  middle Middle[]
+
+  @@map("bottom")
+}
+
+model Middle {
+  id       String @id @default(uuid())
+  topId    String @map("top_id")
+  bottomId String @map("bottom_id")
+
+  top    Top    @relation(fields: [topId], references: [id])
+  bottom Bottom @relation(fields: [bottomId], references: [id])
+
+  @@map("middle")
+}
+
+model Top {
+  id String @id @default(uuid())
+
+  middle Middle[]
+
+  @@map("top")
+}
